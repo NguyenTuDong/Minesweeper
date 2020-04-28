@@ -2,12 +2,13 @@
   <div class="game" :style="{width: gameWidth + 'px'}">
     <div class="header">
       <div class="mineleft">000</div>
-      <button class="main-btn">button</button>
+      <button class="main-btn" @click="newGame">New Game</button>
       <div class="time">00:00</div>
     </div>
     <Board
       :gameWidth=gameWidth
       :bombsNumber=bombsNumber
+      ref="board"
       >
     </Board>
   </div>
@@ -22,8 +23,13 @@ export default {
   },
   data() {
     return{
-      gameWidth: 500,
-      bombsNumber: 40,
+      gameWidth: 800,
+      bombsNumber: 60,
+    }
+  },
+  methods: {
+    newGame() {
+      this.$refs.board.newGame();
     }
   }
 }

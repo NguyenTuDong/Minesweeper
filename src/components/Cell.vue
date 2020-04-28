@@ -1,10 +1,13 @@
 <template>
-  <div class="cell" :style="{color: color(value)}" @click="openCell">
-    <div v-if="clicked">
+  <div class="cell" :class="{opened: state == 1}" :style="{color: color(value)}">
+    <div v-if="state == 1">
       <div v-if="value == 9" class="bomb">
         <img src="src/assets/bomb.png" alt="">
       </div>
       <div v-else-if="value != 0">{{value}}</div>
+    </div>
+    <div v-if="state == 2">
+      cờ
     </div>
   </div>
 </template>
@@ -16,11 +19,15 @@ export default {
     value: {
       type: Number,
       required: true,
+    },
+    state: {
+      type: Number,
+      required: true,
     }
   },
   data() {
     return {
-      clicked: false,
+      
     }
   },
   methods: {
@@ -43,9 +50,6 @@ export default {
         default:
           break;
       }
-    },
-    openCell(){
-      this.clicked = true;
     }
   }
 }
@@ -59,6 +63,7 @@ export default {
   cursor: pointer;
   height: 100%;
   font-weight: bold;
+  background-color: rgb(129, 129, 129);
   div{
     display: flex;
     text-align: center;
@@ -68,6 +73,9 @@ export default {
       width: 100%;
     }
   }
+}
+.opened {
+  background-color: rgb(212, 212, 212);
 }
 .bomb{
   padding: 7px;
